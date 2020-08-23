@@ -12,25 +12,46 @@
             <div id="showInfo">
               <img class="infoContent" id="cntImg" style="width:30px" src="{% static 'images/cnt.png' %}" title="조회수">
               <p class="infoContent" id="cntNum" style="display: inline">{{ imgDetail.image_cnt }}</p>
-              <button class="like, infoContent" name="like"><img class="but" src="{% static 'images/like.png' %}"></button>
+              <button class="like, infoContent" name="like" onclick="clickLike({{ imgDetail.id }})"><img class="but" src="{% static 'images/like.png' %}"></button>
               <p class="infoContent" id="likeNum" style="display: inline">{{ imgDetail.image_like }}</p>
-              <button class="like, infoContent" name="dislike"><img class="but" src="{% static 'images/dislike.png' %}"></button>
+              <img class="showLike" src="{% static 'images/like.png' %}">
+              <p class="showLike" style="display: inline">{{ imgLike.image_like }}</p>
+              <button class="like, infoContent" name="dislike" onclick="clickDislike({{ imgDetail.id }})"><img class="but" src="{% static 'images/dislike.png' %}"></button>
               <p class="infoContent" id="dislikeNum" style="display: inline">{{ imgDetail.image_dislike }}</p>
+              <img class="showDislike" src="{% static 'images/dislike.png' %}">
+              <p class="showDislike" style="display: inline">{{ imgDislike.image_dislike }}</p>
             </div>
           <br>
           <h5>
             {% if imageList.has_previous %}
-            <a href="http://localhost:8000/ootd/photo/{{ imageList.previous_page_number }}/">이전</a>
+            <a href="http://localhost:8000/ootd/detail/{{ imageList.previous_page_number }}/">이전</a>
             {% endif %}
             <a href="#" class="">목록</a>
             {% if imageList.has_next %}
-            <a href="http://localhost:8000/ootd/photo/{{ imageList.next_page_number }}/">다음</a>
+            <a href="http://localhost:8000/ootd/detail/{{ imageList.next_page_number }}/">다음</a>
             {% endif %}
           </h5>
         </div>
     </div>
   </section>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $('document').ready(function() {
+        $('.showLike').hide();
+        $('.showDislike').hide();
+    });
+     function clickLike(id) {
+        location.href = "{% url 'detail' %}"+id+"/"+"0"+"/";
+        $('.like').hide();
+        $('showLike').show();
+     }
+     function clickDislike(id) {
+        location.href = "{% url 'detail' %}"+id+"/"+"1"+"/";
+        $('.like').hide();
+        $('showLike').show();
+     }
+</script>
 {% endblock %}
 
 {% block css %}
