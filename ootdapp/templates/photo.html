@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+  <h2 style="text-align: center">상단탭</h2>
+  <hr>
+  <section>
+    <div class="card" style="width:400px;">
+      <img class="card-img-top" src="{{ imgDetail.image_file.url }}" alt="Card image" style="width:100%">
+        <div class="card-body">
+          <h4 class="card-title">더워요</h4>
+            <div id="showInfo">
+              <img class="infoContent" id="cntImg" style="width:30px" src="{% static 'images/cnt.png' %}" title="조회수">
+              <p class="infoContent" id="cntNum" style="display: inline">{{ imgDetail.image_cnt }}</p>
+              <button class="like, infoContent" name="like"><img class="but" src="{% static 'images/like.png' %}"></button>
+              <p class="infoContent" id="likeNum" style="display: inline">{{ imgDetail.image_like }}</p>
+              <button class="like, infoContent" name="dislike"><img class="but" src="{% static 'images/dislike.png' %}"></button>
+              <p class="infoContent" id="dislikeNum" style="display: inline">{{ imgDetail.image_dislike }}</p>
+            </div>
+          <br>
+          <h5>
+            {% if imageList.has_previous %}
+            <a href="http://localhost:8000/ootd/photo/{{ imageList.previous_page_number }}/">이전</a>
+            {% endif %}
+            <a href="#" class="">목록</a>
+            {% if imageList.has_next %}
+            <a href="http://localhost:8000/ootd/photo/{{ imageList.next_page_number }}/">다음</a>
+            {% endif %}
+          </h5>
+        </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block css %}
+    .card {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .showInfo {
+      height: 5%;
+    }
+    .infoContent {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+    .card {
+      box-shadow: 10px 10px gray;
+      border: 1px solid;
+      border-radius: 10px;
+    }
+    .card-img-top {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    #cntImg {
+      margin-left: 5px;
+      margin-right: auto;
+    }
+    .like {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .but {
+      width: 20px;
+    }
+{% endblock %}

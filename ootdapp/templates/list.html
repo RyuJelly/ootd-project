@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>사진 목록</h1>
+{% for imgDetail in imageList %}
+    <div>{{ imgDetail.image_name }}</div>
+    <img class="card-img-top" src="{{ imgDetail.image_file.url }}" alt="Card image" style="width:100%">
+{% endfor %}
+<!--<form method="POST" action="{% url 'list' %}" enctype="multipart/form-data">-->
+<!--    {% csrf_token %}-->
+<!--    <input type="text" name="image_name" style="margin:5px">작성자<br>-->
+<!--    <input type="text" name="city_id" style="margin:5px">도시<br>-->
+<!--    <input type="text" name="sido_id" style="margin:5px">시도<br>-->
+<!--    <input type="file" name="image_file"><br>-->
+<!--    <button type="submit">저장</button>-->
+<!--    <button type="reset">재작성</button>-->
+</form>
+</body>
+</html>
